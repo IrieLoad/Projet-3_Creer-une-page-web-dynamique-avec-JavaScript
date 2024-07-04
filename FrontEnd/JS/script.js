@@ -171,3 +171,4 @@ function initFilterCategory() {
 
 // Appelle la fonction collectCategories pour récupérer et afficher les catégories au chargement de la page
 collectCategories();
+

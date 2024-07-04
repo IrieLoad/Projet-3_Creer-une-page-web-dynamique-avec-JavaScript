@@ -30,6 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	background-color: #FFFEF8;
 }
 ol, ul {
 	list-style: none;
@@ -95,7 +96,7 @@ nav li {
 	font-size: 1.2em;
 }
 
-li:hover {
+ul li a:hover {
 	color: #B1663C;
 }
 #introduction {
@@ -184,5 +185,15 @@ footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
+}
+
+/* modifie l'apparence des liens dans le header */
+
+header a {
+	text-decoration: none;
+}
+
+header nav ul li a {
+	color: black;
 }
 
