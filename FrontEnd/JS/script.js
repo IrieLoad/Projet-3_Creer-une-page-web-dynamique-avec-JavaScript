@@ -172,3 +172,60 @@ function initFilterCategory() {
 // Appelle la fonction collectCategories pour récupérer et afficher les catégories au chargement de la page
 collectCategories();
 
+//****** Étape 3.1 : Ajout de la fenêtre modale. 
+let modal = null;
+
+const openModal = function (e) {
+    e.preventDefault();
+    console.log("Ouverture de la modale");
+
+    const target = document.querySelector(e.currentTarget.getAttribute('href'));
+    if (!target) {
+        console.error("Modale non trouvée");
+        return;
+    }
+
+    target.style.display = null;
+    target.removeAttribute('aria-hidden');
+    target.setAttribute('aria-modal', 'true');
+    modal = target;
+    modal.addEventListener('click', closeModal);
+    modal.querySelector('.js-modal-close').addEventListener('click', closeModal);
+    modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation);
+
+    // Show the gallery view by default
+    document.getElementById('view-gallery').classList.add('active');
+    document.getElementById('view-add-photo').classList.remove('active');
+    console.log("Modale ouverte");
+};
+
+const closeModal = function (e) {
+    if (modal === null) return;
+    e.preventDefault();
+    console.log("Fermeture de la modale");
+
+    modal.style.display = "none";
+    modal.setAttribute('aria-hidden', 'true');
+    modal.removeAttribute('aria-modal');
+    modal.removeEventListener('click', closeModal);
+    modal.querySelector('.js-modal-close').removeEventListener('click', closeModal);
+    modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation);
+    modal = null;
+    console.log("Modale fermée");
+};
+
+const stopPropagation = function (e) {
+    e.stopPropagation();
+};
+
+const openAddPhotoView = function (e) {
+    e.preventDefault();
+    document.getElementById('view-gallery').classList.remove('active');
+    document.getElementById('view-add-photo').classList.add('active');
+};
+
+document.querySelector('.js-modal-trigger').addEventListener('click', openModal);
+document.getElementById('open-add-photo').addEventListener('click', openAddPhotoView);
+
+console.log("Écouteur d'événements ajouté au lien de déclenchement de la modale");
+

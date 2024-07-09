@@ -43,7 +43,7 @@ form.addEventListener("submit", function (e) {
         // Si la connexion est réussie, stocke le token d'authentification
         localStorage.setItem("authToken", data.token); // Stocke le token dans le stockage local
         console.log("Token stored in localStorage:", localStorage.getItem('authToken'));
-        window.location.href = "/FrontEnd/index.html"; // Redirige l'utilisateur vers la page d'accueil
+        location.href = "/FrontEnd/homepage-edit.html"; // Redirige l'utilisateur vers la page d'accueil
         console.log("Redirection vers la page d'accueil");
     })
     .catch(function (error) {

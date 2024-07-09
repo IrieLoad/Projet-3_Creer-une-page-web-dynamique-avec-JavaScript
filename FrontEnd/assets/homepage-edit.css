@@ -1,0 +1,242 @@
+.editMode-titleProjects {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    gap: 20px;
+}
+
+.editMode-titleProjects a, span {
+    margin-bottom: 30px;
+}
+
+.editMode-titleProjects a {
+    text-decoration: none;
+    color: black;
+}
+
+body header {
+    flex-direction: column;
+    margin:0px;
+}
+
+.editMode-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    background-color: black;
+    color:white;
+    gap: 10px;
+}
+
+.editMode-header {
+    display: flex;
+	justify-content: space-between;
+	margin: 50px 0
+}
+
+.modal-section {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    margin: 0;
+    z-index: 1000;
+}
+
+.modal-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    max-width: 560px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 30px 100px;
+    position: relative;
+    min-height: 650px;
+    max-height: 100vh;
+    overflow-y: auto; 
+}
+
+.js-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: #000000;
+}
+
+.modal-div h2 {
+    color: black;
+    font-family:"work sans";
+    font-weight: 100;
+    font-size: 24px;
+    margin: 40px 0;
+}
+
+.modal-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 30px 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    max-height: 500px;
+    overflow-y: auto;
+    border-bottom: 2px solid #dcdcdc;
+    padding-bottom: 60px;
+}
+
+.modal-gallery img {
+    width: 100%;
+    height: auto;
+}
+
+.modal-div a {
+    height: 40px;
+    font-size: 1em;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    font-family: 'Syne', sans-serif;
+    color: white;
+    background-color: #1D6154;
+    margin: 20px 0;
+    width: 250px;
+    text-align: center;
+    border-radius: 60px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-div a:hover {
+    background-color: #15543b;
+}
+
+.modal-view {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#view-gallery.active, #view-add-photo.active {
+    display: flex;
+}
+
+.modal-view form {
+    width: 100%;
+}
+
+.js-back {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    cursor: pointer;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: #000000;
+}
+.uploadForm-div {
+    border-bottom: 2px solid #dcdcdc;
+    padding-bottom: 30px;
+}
+
+.upload-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.upload-div .upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #E8F1F6;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.upload-label i {
+    font-size: 55px;
+    color: #a8a8a8;
+    margin-bottom: 10px;
+}
+
+.upload-label button {
+    font-size: 16px;
+    color: #306685;
+    background-color: #CBD6DC;
+    border-radius: 50px;
+    border: none;
+    width: 180px;
+    padding: 10px 0;
+    margin-bottom: 10px;
+
+}
+
+.upload-section p {
+    font-size: 12px;
+    color: #a8a8a8;
+}
+
+.modal-div label {
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    margin: 10px 0 10px;
+    color: #333;
+    font-weight: bold;
+}
+
+.modal-div input,
+.modal-div select {
+    width: 100%;
+    padding: 10px 0 10px 5px;
+    margin-bottom: 20px;
+    border: none;
+    font-size: 14px;
+    box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.9);
+}
+
+.modal-div input {
+    height: 25px;
+}
+
+.modal-div select {
+    height: 45px;
+}
+
+#add-photo-form button[type="submit"] {
+    height: 40px;
+    font-size: 1em;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    font-family: 'Syne', sans-serif;
+    color: white;
+    background-color: #1D6154;
+    margin: 30px 0;
+    width: 250px;
+    text-align: center;
+    border-radius: 60px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
