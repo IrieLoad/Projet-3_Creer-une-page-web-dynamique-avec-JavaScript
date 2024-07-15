@@ -1,23 +1,11 @@
-.editMode-titleProjects {
-    display: flex;
-    justify-content:center;
-    align-items: center;
-    gap: 20px;
-}
-
-.editMode-titleProjects a, span {
-    margin-bottom: 30px;
-}
-
-.editMode-titleProjects a {
-    text-decoration: none;
-    color: black;
-}
+/****** Mode édition - Styles gobales ******/
 
 body header {
     flex-direction: column;
     margin:0px;
 }
+
+/****** Mode édition - Header ******/
 
 .editMode-banner {
     display: flex;
@@ -34,6 +22,29 @@ body header {
 	justify-content: space-between;
 	margin: 50px 0
 }
+.editMode-titleProjects {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    gap: 20px;
+}
+
+/****** Mode édition - Main Section ******/
+/* Introduction  */
+
+/* Portfolio */
+
+
+.editMode-titleProjects a, span {
+    margin-bottom: 30px;
+}
+
+.editMode-titleProjects a {
+    text-decoration: none;
+    color: black;
+}
+
+/****** Mode édition - Modale ******/
 
 .modal-section {
     position: fixed;
@@ -129,6 +140,10 @@ body header {
     width: 100%;
 }
 
+.modal-view.active {
+    display: flex;
+}
+
 #view-gallery.active, #view-add-photo.active {
     display: flex;
 }
@@ -147,48 +162,61 @@ body header {
     border: none;
     color: #000000;
 }
+
+#add-photo-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .uploadForm-div {
     border-bottom: 2px solid #dcdcdc;
     padding-bottom: 30px;
+    width: 100%;
 }
 
 .upload-div {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 20px;
-}
-
-.upload-div .upload-label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 200px;
-    border-radius: 8px;
-    cursor: pointer;
+    margin-bottom: 30px;
     background-color: #E8F1F6;
-    margin-bottom: 10px;
-    text-align: center;
+    height: 230px;
+    border-radius: 5px;
 }
 
-.upload-label i {
-    font-size: 55px;
-    color: #a8a8a8;
-    margin-bottom: 10px;
+.fa-image {
+    font-size: 6rem;
 }
 
-.upload-label button {
-    font-size: 16px;
-    color: #306685;
+.upload-label {
+    display: flex;
+    justify-content: center;
     background-color: #CBD6DC;
+    color: #306685;
+    font-size: medium;
+    cursor: pointer;
+    width: 40%;
     border-radius: 50px;
-    border: none;
-    width: 180px;
-    padding: 10px 0;
-    margin-bottom: 10px;
+    padding: 15px 0;
+    margin: 10px 0;
+}
 
+.upload-div img {
+    display: none;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.upload-div p {
+    color: #444444;
+}
+
+.uploadForm-div label {
+    color: #3D3D3D;
+    font-size: 16px;
+    font-weight: 500px;
 }
 
 .upload-section p {
@@ -196,31 +224,19 @@ body header {
     color: #a8a8a8;
 }
 
-.modal-div label {
-    display: block;
+.uploadForm-div input,
+.uploadForm-div select {
     width: 100%;
-    font-size: 14px;
-    margin: 10px 0 10px;
-    color: #333;
-    font-weight: bold;
-}
-
-.modal-div input,
-.modal-div select {
-    width: 100%;
-    padding: 10px 0 10px 5px;
-    margin-bottom: 20px;
+    padding: 10px;
+    margin: 10px 0 20px 0;
+    box-sizing: border-box;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.9);
     border: none;
-    font-size: 14px;
-    box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.9);
-}
-
-.modal-div input {
-    height: 25px;
-}
-
-.modal-div select {
-    height: 45px;
+    background-color: white;
+    height: 55px;
+    cursor: pointer;
 }
 
 #add-photo-form button[type="submit"] {
@@ -230,15 +246,18 @@ body header {
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
     font-family: 'Syne', sans-serif;
     color: white;
-    background-color: #1D6154;
+    background-color: #A7A7A7;
     margin: 30px 0;
     width: 250px;
     text-align: center;
     border-radius: 60px;
     text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    cursor: pointer;
+}
+
+#add-photo-form button[type="submit"]:hover {
+    background-color: #1D6154;
+    ;
 }
 
 .modal-gallery figure {

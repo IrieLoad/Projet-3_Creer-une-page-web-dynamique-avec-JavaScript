@@ -274,7 +274,7 @@ async function displayGalleryModal() {
 function deleteProject() {
     // Sélectionner toutes les icônes poubelles
     const allTrashIcons = document.querySelectorAll(".fa-trash-can");
-    // Récupérer le jeton d'authentification depuis le stockage local
+    // Récupérer le token d'authentification depuis le stockage local
     const token = localStorage.getItem('authToken');
 
      // Parcourir chaque icône poubelle
@@ -289,7 +289,7 @@ function deleteProject() {
                     method: 'DELETE',
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}` // Ajouter le jeton d'authentification
+                        "Authorization": `Bearer ${token}` // Ajouter le tiken d'authentification
                     }
                 });
                 // Vérifier si la suppression a réussi
@@ -300,11 +300,12 @@ function deleteProject() {
                 }
                 // Si la suppression a réussi, afficher un message dans la console
                 console.log("Le delete a réussi");
+
                 // Réafficher la galerie après la suppression du projet
                 displayGalleryModal();
             } catch (error) {
                 // Afficher l'erreur dans la console s'il y a un problème
-                console.error("Erreur lors de la suppression :", error);
+                console.log(error);
             }
         });
     });
@@ -313,3 +314,81 @@ function deleteProject() {
 // Appeler la fonction pour afficher la galerie lors du chargement de la page
 displayGalleryModal();
 
+/****** Étape 3.3 : Envoi d’un nouveau projet au back-end via le formulaire de la modale ******/
+
+// Sélectionner les éléments de la modale
+const viewGallery = document.getElementById("view-gallery"); // Vue de la galerie photo
+const viewAddPhoto = document.getElementById("view-add-photo"); // Vue d'ajout de photo
+const backArrow = document.querySelector(".js-back"); // Bouton pour revenir à la galerie
+
+// Fonction pour revenir à la galerie photo
+backArrow.addEventListener("click", function() {
+    viewAddPhoto.classList.remove("active"); // Masquer la vue d'ajout de photo
+    viewGallery.classList.add("active"); // Afficher la vue de la galerie
+});
+
+// Insertion d'une image dans le formulaire
+const addImage = document.querySelector(".upload-div img"); // Élément img pour afficher l'aperçu
+const inputPreview = document.querySelector(".upload-div input"); // Champ de saisie de fichier
+const labelPreview = document.querySelector(".upload-label"); // Label pour l'ajout de photo
+const iconPreview = document.querySelector(".upload-div .fa-image"); // Icône de l'image
+const textPreview = document.querySelector(".upload-div p"); // Texte indiquant les formats acceptés
+
+// Écouter le changement de fichier dans le champ de saisie
+inputPreview.addEventListener("change", () => {
+    const file = inputPreview.files[0]; // Récupérer le premier fichier sélectionné
+    if (file) { // Si un fichier est sélectionné
+        const reader = new FileReader(); // Créer un objet FileReader pour lire le fichier
+        reader.onload = function(e) { // Lorsque la lecture est terminée
+            addImage.src = e.target.result; // Définir la source de l'image avec le résultat de la lecture
+            addImage.style.display = "flex"; // Afficher l'élément img
+            labelPreview.style.display = "none"; // Masquer le label
+            iconPreview.style.display = "none"; // Masquer l'icône
+            textPreview.style.display = "none"; // Masquer le texte
+        }
+        reader.readAsDataURL(file); // Lire le fichier comme une URL de données
+    }
+});
+
+// Fonction pour récupérer les catégories depuis l'API
+async function collectCategories() {
+    try {
+        // Faire une requête HTTP GET à l'API pour obtenir les catégories
+        const response = await fetch("http://localhost:5678/api/categories");
+
+        // Vérifier si la requête a réussi
+        if (!response.ok) {
+            throw new Error(`Erreur HTTP ! Statut : ${response.status}`);
+        }
+
+        // Convertir la réponse en JSON (un format de données)
+        const dataCategories = await response.json();
+
+        // Retourner les données des catégories récupérées
+        return dataCategories;
+    } catch (error) {
+        // Afficher un message d'erreur en cas de problème
+        console.log(error);
+        return []; // Retourner un tableau vide en cas d'erreur
+    }
+}
+
+// Fonction pour afficher les catégories dans le formulaire d'ajout de photo
+async function displayCategoriesModal() {
+    // Sélectionner l'élément <select> dans le formulaire
+    const select = document.querySelector(".uploadForm-div select");
+
+    // Récupérer les catégories en appelant la fonction collectCategories
+    const categories = await collectCategories();
+    
+    // Parcourir chaque catégorie et créer une option dans le <select>
+    categories.forEach(category => {
+        const option = document.createElement("option"); // Créer un nouvel élément <option>
+        option.value = category.id; // Définir la valeur de l'option comme l'ID de la catégorie
+        option.textContent = category.name; // Définir le texte de l'option comme le nom de la catégorie
+        select.appendChild(option); // Ajouter l'option au <select>
+    });
+}
+
+// Appeler la fonction pour afficher les catégories dans le formulaire d'ajout de photo
+displayCategoriesModal();
