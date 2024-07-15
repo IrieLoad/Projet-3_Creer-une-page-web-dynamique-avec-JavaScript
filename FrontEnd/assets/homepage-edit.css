@@ -240,3 +240,26 @@ body header {
     justify-content: center;
     align-items: center;
 }
+
+.modal-gallery figure {
+    position: relative;
+    margin: 10px;
+}
+
+.modal-gallery span {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: black;
+    border-radius: 12%;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-gallery .fa-trash-can {
+    font-size: 10px;
+    color: white;
+    cursor: pointer;
+}

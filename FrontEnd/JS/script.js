@@ -173,59 +173,143 @@ function initFilterCategory() {
 collectCategories();
 
 //****** Étape 3.1 : Ajout de la fenêtre modale. 
-let modal = null;
+
+let modal = null; // Variable pour stocker la référence de la modale ouverte
 
 const openModal = function (e) {
-    e.preventDefault();
+    e.preventDefault(); // Empêche le comportement par défaut du lien
     console.log("Ouverture de la modale");
 
-    const target = document.querySelector(e.currentTarget.getAttribute('href'));
-    if (!target) {
+    const target = document.querySelector(e.currentTarget.getAttribute('href')); // Trouve l'élément cible de la modale
+    if (!target) { // Vérifie si la modale cible existe
         console.error("Modale non trouvée");
         return;
     }
 
-    target.style.display = null;
-    target.removeAttribute('aria-hidden');
-    target.setAttribute('aria-modal', 'true');
-    modal = target;
-    modal.addEventListener('click', closeModal);
-    modal.querySelector('.js-modal-close').addEventListener('click', closeModal);
-    modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation);
+    target.style.display = null; // Affiche la modale en réinitialisant le style display
+    target.removeAttribute('aria-hidden'); // Rend la modale visible pour les lecteurs d'écran
+    target.setAttribute('aria-modal', 'true'); // Indique que c'est une modale
+    modal = target; // Stocke la référence de la modale
+    modal.addEventListener('click', closeModal); // Ajoute un écouteur d'événement pour fermer la modale au clic
+    modal.querySelector('.js-modal-close').addEventListener('click', closeModal); // Ajoute un écouteur d'événement pour fermer la modale via le bouton de fermeture
+    modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation); // Empêche la propagation de l'événement de clic
 
-    // Show the gallery view by default
-    document.getElementById('view-gallery').classList.add('active');
+    // Affiche la vue de la galerie par défaut
+    document.getElementById('view-gallery').classList.add('active'); 
     document.getElementById('view-add-photo').classList.remove('active');
     console.log("Modale ouverte");
 };
 
 const closeModal = function (e) {
-    if (modal === null) return;
-    e.preventDefault();
+    if (modal === null) return; // Si aucune modale n'est ouverte, ne fait rien
+    e.preventDefault(); // Empêche le comportement par défaut
     console.log("Fermeture de la modale");
 
-    modal.style.display = "none";
-    modal.setAttribute('aria-hidden', 'true');
-    modal.removeAttribute('aria-modal');
-    modal.removeEventListener('click', closeModal);
-    modal.querySelector('.js-modal-close').removeEventListener('click', closeModal);
-    modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation);
-    modal = null;
+    modal.style.display = "none"; // Cache la modale
+    modal.setAttribute('aria-hidden', 'true'); // Rend la modale invisible pour les lecteurs d'écran
+    modal.removeAttribute('aria-modal'); // Retire l'attribut aria-modal
+    modal.removeEventListener('click', closeModal); // Retire l'écouteur d'événement pour fermer la modale
+    modal.querySelector('.js-modal-close').removeEventListener('click', closeModal); // Retire l'écouteur d'événement du bouton de fermeture
+    modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation); // Retire l'écouteur d'événement qui empêche la propagation
+    modal = null; // Réinitialise la variable modale
     console.log("Modale fermée");
 };
 
 const stopPropagation = function (e) {
-    e.stopPropagation();
+    e.stopPropagation(); // Empêche la propagation de l'événement de clic
 };
 
 const openAddPhotoView = function (e) {
-    e.preventDefault();
-    document.getElementById('view-gallery').classList.remove('active');
-    document.getElementById('view-add-photo').classList.add('active');
+    e.preventDefault(); // Empêche le comportement par défaut du lien
+    document.getElementById('view-gallery').classList.remove('active'); // Désactive la vue de la galerie
+    document.getElementById('view-add-photo').classList.add('active'); // Active la vue pour ajouter une photo
 };
 
-document.querySelector('.js-modal-trigger').addEventListener('click', openModal);
-document.getElementById('open-add-photo').addEventListener('click', openAddPhotoView);
+document.querySelector('.js-modal-trigger').addEventListener('click', openModal); // Ajoute un écouteur d'événement pour ouvrir la modale
+document.getElementById('open-add-photo').addEventListener('click', openAddPhotoView); // Ajoute un écouteur d'événement pour ouvrir la vue "ajouter une photo"
 
-console.log("Écouteur d'événements ajouté au lien de déclenchement de la modale");
+console.log("Écouteur d'événements ajouté au lien de déclenchement de la modale"); // Message de confirmation dans la console
+
+
+// Sélectionner le conteneur de la galerie où les images seront affichées
+const photoGallery = document.querySelector(".modal-gallery");
+
+// Fonction asynchrone pour afficher les images de la galerie
+async function displayGalleryModal() {
+    // Vider le conteneur de la galerie avant d'ajouter de nouvelles images
+    photoGallery.innerHTML = "";
+
+    // Récupérer les projets depuis l'API
+    const projects = await collectProjects();
+
+    // Parcourir chaque projet récupéré
+    projects.forEach(project => {
+        // Créer des éléments HTML pour chaque projet
+        const figure = document.createElement("figure");
+        const img = document.createElement("img");
+        const span = document.createElement("span");
+        const trash = document.createElement("i");
+
+        // Ajouter des classes et des attributs aux éléments créés
+        trash.classList.add("fa-solid", "fa-trash-can"); // Ajouter des classes pour l'icône poubelle
+        trash.dataset.id = project.id; // Stocker l'ID du projet dans l'élément poubelle
+        img.src = project.imageUrl; // Définir l'URL de l'image
+
+        // Ajouter les éléments enfants à leurs parents respectifs
+        span.appendChild(trash); // Ajouter l'icône poubelle dans le span
+        figure.appendChild(span); // Ajouter le span dans la figure
+        figure.appendChild(img); // Ajouter l'image dans la figure
+
+        // Ajouter la figure complète dans le conteneur de la galerie
+        photoGallery.appendChild(figure);
+    });
+
+    // Ajouter la fonctionnalité de suppression d'images
+    deleteProject();
+}
+
+//****** Étape 3.2 : Suppression de travaux existants
+
+// Fonction pour ajouter la fonctionnalité de suppression d'images
+function deleteProject() {
+    // Sélectionner toutes les icônes poubelles
+    const allTrashIcons = document.querySelectorAll(".fa-trash-can");
+    // Récupérer le jeton d'authentification depuis le stockage local
+    const token = localStorage.getItem('authToken');
+
+     // Parcourir chaque icône poubelle
+    allTrashIcons.forEach(trashIcon => {
+        // Ajouter un écouteur d'événements pour le clic sur l'icône poubelle
+        trashIcon.addEventListener("click", async (e) => {
+            // Récupérer l'ID du projet à supprimer
+            const projectId = trashIcon.dataset.id;
+            try {
+                // Envoyer une requête DELETE à l'API pour supprimer le projet
+                const response = await fetch(`http://localhost:5678/api/works/${projectId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}` // Ajouter le jeton d'authentification
+                    }
+                });
+                // Vérifier si la suppression a réussi
+                if (!response.ok) {
+                    // Si la suppression a échoué, afficher un message dans la console
+                    console.log("Le delete n'a pas réussi !");
+                    return;
+                }
+                // Si la suppression a réussi, afficher un message dans la console
+                console.log("Le delete a réussi");
+                // Réafficher la galerie après la suppression du projet
+                displayGalleryModal();
+            } catch (error) {
+                // Afficher l'erreur dans la console s'il y a un problème
+                console.error("Erreur lors de la suppression :", error);
+            }
+        });
+    });
+}
+
+// Appeler la fonction pour afficher la galerie lors du chargement de la page
+displayGalleryModal();
 
