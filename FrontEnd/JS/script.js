@@ -208,8 +208,8 @@ const closeModal = function (e) {
     modal.style.display = "none"; // Cache la modale
     modal.setAttribute('aria-hidden', 'true'); // Rend la modale invisible pour les lecteurs d'écran
     modal.removeAttribute('aria-modal'); // Retire l'attribut aria-modal
-    modal.removeEventListener('click', closeModal); // Retire l'écouteur d'événement pour fermer la modale
-    modal.querySelector('.js-modal-close').removeEventListener('click', closeModal); // Retire l'écouteur d'événement du bouton de fermeture
+    //modal.removeEventListener('click', closeModal); // Retire l'écouteur d'événement pour fermer la modale
+    //modal.querySelector('.js-modal-close').removeEventListener('click', closeModal); // Retire l'écouteur d'événement du bouton de fermeture
     modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation); // Retire l'écouteur d'événement qui empêche la propagation
     modal = null; // Réinitialise la variable modale
     console.log("Modale fermée");
@@ -275,7 +275,14 @@ function deleteProject() {
     // Sélectionner toutes les icônes poubelles
     const allTrashIcons = document.querySelectorAll(".fa-trash-can");
     // Récupérer le token d'authentification depuis le stockage local
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem("authToken");
+
+    if (!token) {
+        console.error("Token non trouvé. Veuillez vous connecter.");
+        return;
+    } else {
+        console.log("Token récupéré:", token);
+    }
 
      // Parcourir chaque icône poubelle
     allTrashIcons.forEach(trashIcon => {
@@ -283,6 +290,8 @@ function deleteProject() {
         trashIcon.addEventListener("click", async (e) => {
             // Récupérer l'ID du projet à supprimer
             const projectId = trashIcon.dataset.id;
+            console.log("Suppression du projet avec l'ID:", projectId);
+
             try {
                 // Envoyer une requête DELETE à l'API pour supprimer le projet
                 const response = await fetch(`http://localhost:5678/api/works/${projectId}`, {
@@ -303,6 +312,7 @@ function deleteProject() {
 
                 // Réafficher la galerie après la suppression du projet
                 displayGalleryModal();
+                
             } catch (error) {
                 // Afficher l'erreur dans la console s'il y a un problème
                 console.log(error);
@@ -392,3 +402,76 @@ async function displayCategoriesModal() {
 
 // Appeler la fonction pour afficher les catégories dans le formulaire d'ajout de photo
 displayCategoriesModal();
+
+// Sélectionner les éléments du formulaire et les champs concernés
+const projectAddForm = document.querySelector(".modal-view form"); // Sélectionner le formulaire
+const title = document.querySelector(".uploadForm-div #title"); // Sélectionner le champ titre
+const category = document.querySelector(".uploadForm-div #category"); // Sélectionner le champ catégorie
+const inputFile = document.querySelector(".upload-div input"); // Sélectionner le champ fichier
+
+const statutMessage = document.createElement("p"); // Créer un élément pour afficher les messages d'erreur
+projectAddForm.appendChild(statutMessage); // Ajouter le message d'erreur à la fin du formulaire
+
+// Ajouter un écouteur d'événement sur le formulaire pour détecter l'envoie
+projectAddForm.addEventListener("submit", async (e) => {
+    e.preventDefault(); // Empêcher le comportement par défaut du formulaire (rechargement de la page)
+
+    // Vérifier que tous les champs sont remplis
+    if (!title.value || !category.value || !inputFile.value) {
+        // Si un des champs n'est pas rempli, afficher un message d'erreur
+        statutMessage.textContent = "Veuillez remplir tous les champs et ajouter une photo.";
+        statutMessage.style.color = 'red';
+        return; // Arrêter l'exécution de la fonction
+    }
+
+    // Créer un objet FormData pour envoyer les données du formulaire
+    const formData = new FormData();
+    
+    formData.append('title', title.value); // Ajouter le titre au FormData
+    formData.append('category', category.value); // Ajouter la catégorie au FormData
+    formData.append('image', inputFile.files[0]); // Ajouter le fichier image au FormData
+
+    // Récupérer le token d'authentification depuis le stockage local
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+        // Si le jeton n'est pas présent, afficher un message d'erreur
+        statutMessage.textContent = "Vous devez être connecté pour ajouter un projet.";
+        statutMessage.style.color = 'red';
+        return; // Arrêter l'exécution de la fonction
+    }
+
+    try {
+        // Envoyer une requête POST à l'API pour ajouter un nouveau projet
+        const response = await fetch("http://localhost:5678/api/works", {
+            method: "POST", // Méthode HTTP POST pour envoyer des données
+            body: formData, // Utiliser FormData comme corps de la requête
+            headers: {
+                "Authorization": `Bearer ${token}` // Ajouter le token d'authentification dans les en-têtes
+            }
+        });
+
+        if (!response.ok) {
+            // Si la réponse n'est pas correcte (statut HTTP 200-299), lancer une erreur
+            throw new Error("Erreur lors de l'envoi du formulaire");
+        }
+
+        // Convertir la réponse en JSON
+        const data = await response.json();
+
+        // Réinitialiser le formulaire après succès
+        projectAddForm.reset();
+        statutMessage.textContent = "Projet ajouté avec succès !"; // Message de confirmation; 
+        statutMessage.style.color = 'green'; // Couleur verte pour indiquer le succès
+        displayProjects(); // Afficher les projets mis à jour (fonction non définie dans ce code)
+        displayGalleryModal(); // Afficher la galerie mise à jour (fonction non définie dans ce code)
+
+    } catch (error) {
+        // En cas d'erreur, afficher un message d'erreur
+        statutMessage.textContent = "Erreur lors de l'envoi du formulaire. Veuillez réessayer.";
+        statutMessage.style.color = 'red';
+    }
+});
+
+
+
+
