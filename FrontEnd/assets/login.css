@@ -1,3 +1,4 @@
+/* Styles globaux pour html et le body de la page de login */
 html, .login-body{
     height: 100%;
     margin: 0;
@@ -5,6 +6,7 @@ html, .login-body{
     justify-content: center;
 }
 
+/* Body de la page de login */
 .login-body {
     display: flex;
     flex-direction: column;
@@ -13,6 +15,7 @@ html, .login-body{
     max-width: 1200px;
 }
 
+/* Conteneur principal pour le contenu de la page de login */
 .login-content {
     flex: 1;
     display: flex;
@@ -20,15 +23,17 @@ html, .login-body{
     justify-content: center;
 }
 
+/* Section principale du contenu */
 .content {
     flex: 1;
 }
 
+/* Titre et lien de la section de login */
 .login-section h2, a {
     text-align: center;
 }
 
-
+/* Formulaire de login */
 .login-form {
     display: flex;
     flex-direction: column;
@@ -36,11 +41,13 @@ html, .login-body{
     margin: auto;
 }
 
+/* Labels du formulaire de login */
 .login-form label {
     padding-top: 30px;
     font-size: small;
 }
 
+/* Inputs du formulaire de login */
 .login-form input {
     height: 35px;
     margin-top: 5px;
@@ -48,16 +55,19 @@ html, .login-body{
     box-shadow:0px 4px 14px rgba(0, 0, 0, 0.09) ;
 }
 
+/* Bouton de soumission du formulaire */
 .login-form input[type="submit"] {
     margin-top: 30px;
     height: 40px;
     width:150px;
 }
 
+/* Lien du mot de passe oublié dans le formulaire */
 .login-form a {
     color: black;
 }
 
+/* Footer de la page de login */
 .login-footer {
     background-color: white;
     display: flex;
@@ -69,6 +79,8 @@ html, .login-body{
     bottom: 0;
 }
 
+/* Eléments de liste dans le footer */
 .login-footer nav li {
     padding: 0 200px 0 0;
 }
+

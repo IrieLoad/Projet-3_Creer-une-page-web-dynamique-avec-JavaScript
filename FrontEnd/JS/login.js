@@ -15,8 +15,8 @@ form.addEventListener("submit", function (e) {
     const usersPassword = password.value; // Récupère la valeur du champ mot de passe
 
     // Log les valeurs récupérées
-    console.log("Email:", usersEmail);
-    console.log("Password:", usersPassword);
+    //console.log("Email:", usersEmail);
+    //console.log("Password:", usersPassword);
     
     // Envoie une requête de connexion à l'API
     fetch("http://localhost:5678/api/users/login", {
@@ -30,7 +30,7 @@ form.addEventListener("submit", function (e) {
         })
     })
     .then(function (response) {
-        console.log("Response status:", response.status); // Log le statut de la réponse
+        //console.log("Response status:", response.status);
         // Vérifie si la réponse est correcte (status code 200-299)
         if (response.ok) {
             return response.json(); // Convertit la réponse en format JSON
@@ -41,12 +41,12 @@ form.addEventListener("submit", function (e) {
         }
     })
     .then(function (data) {
-        console.log("Data received:", data); // Log les données reçues
+        //console.log("Data received:", data); //
         // Si la connexion est réussie, stocke le token d'authentification
         window.localStorage.setItem("authToken", data.token); // Stocke le token dans le stockage local
-        console.log("le Token a été stocké dans le localstorage:", window.localStorage.getItem('authToken'));
+        //console.log("Le token a été stocké dans le localstorage:", window.localStorage.getItem('authToken'));
         location.href = "homepage-edit.html"; // Redirige l'utilisateur vers la page d'accueil
-        console.log("Redirection vers la page d'accueil");
+        //console.log("Redirection vers la page d'accueil");
     })
     .catch(function (error) {
         console.error('Error:', error); // Log l'erreur

@@ -187,8 +187,9 @@ footer nav ul {
 	margin: 2em
 }
 
-/* modifie l'apparence des liens dans le header */
+/****** Header ******/
 
+/* liens dans la barre de navigation dans le header */
 header a {
 	text-decoration: none;
 }
@@ -197,13 +198,15 @@ header nav ul li a {
 	color: black;
 }
 
-/* boutons de filtre */
-/* Styles de base pour tous les boutons de filtre */
+/****** boutons de filtre ******/
+
+/* Styles de base pour tous les boutons de filtre par catégorie */
 .filters {
 	display: flex;
 	justify-content: center;
 }
 
+/* Boutons pour filtrer par catégorie*/
 .filter-btn {
 	font-family: 'Work Sans';
 	margin: 20px 0 35px 0;
@@ -218,13 +221,13 @@ header nav ul li a {
     transition: background-color 0.3s, color 0.3s; /* Transition douce pour les changements de style */
 }
 
-/* Effets au survol */
+/* Effets au survol des boutons pour filtrer par catégorie*/
 .filter-btn:hover, .filter-btn.active{
     background-color: #1D6154; /* Couleur de fond au survol */
     color: #fff; /* Couleur du texte au survol */
 }
 
-/* Effets au focus */
+/* Effets au focus des boutons pour filtrer par catégorie*/
 .filter-btn:focus {
     outline: none; /* Supprime le contour par défaut du focus */
     /*box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.25); /* Ajoute une ombre pour indiquer le focus */

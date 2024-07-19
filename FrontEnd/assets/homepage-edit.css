@@ -1,12 +1,14 @@
-/****** Mode édition - Styles gobales ******/
+/****** Styles globaux ******/
 
+/* Style du body et du header */
 body header {
     flex-direction: column;
-    margin:0px;
+    margin: 0;
 }
 
-/****** Mode édition - Header ******/
+/****** Header en mode édition ******/
 
+/* Bannière de mode édition */
 .editMode-banner {
     display: flex;
     justify-content: center;
@@ -17,11 +19,14 @@ body header {
     gap: 10px;
 }
 
+/* Contenu du header en mode édition */
 .editMode-header {
     display: flex;
 	justify-content: space-between;
 	margin: 50px 0
 }
+
+/* Titre des projets en mode édition */
 .editMode-titleProjects {
     display: flex;
     justify-content:center;
@@ -29,23 +34,22 @@ body header {
     gap: 20px;
 }
 
-/****** Mode édition - Main Section ******/
-/* Introduction  */
-
-/* Portfolio */
-
-
+/* Style du lien et du texte de modification des projets */
 .editMode-titleProjects a, span {
     margin-bottom: 30px;
 }
 
+/* Lien de modification des projets */
 .editMode-titleProjects a {
     text-decoration: none;
     color: black;
 }
 
-/****** Mode édition - Modale ******/
+/****** Main Section en mode édition ******/
 
+/****** Modale ******/
+
+/* Section de la modale */
 .modal-section {
     position: fixed;
     display: flex;
@@ -60,6 +64,7 @@ body header {
     z-index: 1000;
 }
 
+/* Conteneur de la modale */
 .modal-div{
     display: flex;
     flex-direction: column;
@@ -75,6 +80,7 @@ body header {
     overflow-y: auto; 
 }
 
+/* Bouton de fermeture de la modale */
 .js-modal-close {
     position: absolute;
     top: 15px;
@@ -86,6 +92,7 @@ body header {
     color: #000000;
 }
 
+/* Titre de la modale */
 .modal-div h2 {
     color: black;
     font-family:"work sans";
@@ -94,10 +101,11 @@ body header {
     margin: 40px 0;
 }
 
+/* Galerie de la modale */
 .modal-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 30px 10px;
+    gap: 20px 0;
     width: 100%;
     margin-bottom: 20px;
     max-height: 500px;
@@ -106,11 +114,13 @@ body header {
     padding-bottom: 60px;
 }
 
+/* Image dans la galerie de la modale */
 .modal-gallery img {
     width: 100%;
     height: auto;
 }
 
+/* Lien de la modale */
 .modal-div a {
     height: 40px;
     font-size: 1em;
@@ -129,10 +139,12 @@ body header {
     align-items: center;
 }
 
+/* Effet au survol du lien de la modale */
 .modal-div a:hover {
     background-color: #15543b;
 }
 
+/* Vue des modales */
 .modal-view {
     display: none;
     flex-direction: column;
@@ -140,18 +152,48 @@ body header {
     width: 100%;
 }
 
+/* Vue active de la modale galerie */
 .modal-view.active {
     display: flex;
 }
 
+/* Conteneur des éléments dans la galerie de la modale */
+.modal-gallery figure {
+    position: relative;
+    margin: 10px;
+}
+
+/* Conteneur de l'icône de suppression dans la galerie de la modale */
+.modal-gallery span {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: black;
+    border-radius: 12%;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Icône de suppression dans la galerie de la modale */
+.modal-gallery .fa-trash-can {
+    font-size: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Vue active pour la galerie et l'ajout de photo */
 #view-gallery.active, #view-add-photo.active {
     display: flex;
 }
 
+/* Formulaire de la modale pour ajouter une photo */
 .modal-view form {
     width: 100%;
 }
 
+/* Bouton de retour en arrière dans la modale d'ajout de photo */
 .js-back {
     position: absolute;
     top: 15px;
@@ -163,18 +205,21 @@ body header {
     color: #000000;
 }
 
+/* Formulaire d'ajout de photo */
 #add-photo-form{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+/* Conteneur du formulaire d'ajout de photo */
 .uploadForm-div {
     border-bottom: 2px solid #dcdcdc;
     padding-bottom: 30px;
     width: 100%;
 }
 
+/* Conteneur du téléchargement de photo */
 .upload-div {
     position: relative;
     display: flex;
@@ -187,10 +232,12 @@ body header {
     border-radius: 5px;
 }
 
+/* Icône de l'image dans le conteneur de téléchargement */
 .fa-image {
     font-size: 6rem;
 }
 
+/* Label pour le téléchargement de photo */
 .upload-label {
     display: flex;
     justify-content: center;
@@ -204,48 +251,49 @@ body header {
     margin: 10px 0;
 }
 
+/* Image dans le conteneur de téléchargement de photo */
 .upload-div img {
     display: none;
     max-width: 100%;
     max-height: 100%;
 }
 
+/* Texte d'information sur les formats d'image */
 .upload-div p {
     color: #444444;
 }
 
+/* Label des champs du formulaire */
 .uploadForm-div label {
     color: #306685;
     font-size: 16px;
     font-weight: 500px;
 }
 
-.upload-section p {
-    font-size: 12px;
-    color: #a8a8a8;
-}
-
+/* Icône pour supprimer l'image */
 .upload-div .remove-image-icon {
-    position: absolute; /* Position absolue pour superposer le bouton */
-    bottom: 10px; /* Position en bas */
-    left: 50%; /* Aligner horizontalement au centre */
+    position: absolute;
+    bottom: 10px; 
+    left: 50%;
     transform: translateX(-50%); /* Centre l'icône horizontalement */
-    background-color: rgba(255, 255, 255, 0.5); /* Fond transparent */
+    background-color: rgba(255, 255, 255, 0.5);
     font-size: 16px;
-    color: #1D6154; /* Couleur du texte */
+    color: #1D6154; 
     border: 1px solid #1D6154; 
     padding: 8px;
     cursor: pointer;
-    display: none; /* Masqué par défaut */
-    transition: background-color 0.3s, color 0.3s; /* Transition douce pour les changements de style */
+    display: none; 
+    transition: background-color 0.3s, color 0.3s;
 }
 
+/* Effet au survol de l'icône pour supprimer l'image */
 .upload-div .remove-image-icon:hover {
-    background-color: #1D6154; /* Couleur de fond au survol */
-    color: white; /* Couleur du texte au survol */
+    background-color: #1D6154; 
+    color: white; 
     border: 1px solid #1D6154;
 }
 
+/* Champs de saisie et de sélection dans le formulaire d'ajout de photo */
 .uploadForm-div input,
 .uploadForm-div select {
     width: 100%;
@@ -261,6 +309,7 @@ body header {
     cursor: pointer;
 }
 
+/* Bouton de validation du formulaire d'ajout de photo */
 .submit-btn {
     height: 40px;
     font-size: 1em;
@@ -277,32 +326,11 @@ body header {
     cursor: not-allowed;
 }
 
+/* Style actif du bouton de validation du formulaire d'ajout de photo */
 .submit-btn.active {
-    background-color: #1D6154; /* Couleur de fond pour le bouton actif */
-    color: #fff; /* Couleur du texte pour le bouton actif */
-    border: 1px solid #1D6154; /* Bordure bleue */
+    background-color: #1D6154; 
+    color: #fff; 
+    border: 1px solid #1D6154;
     cursor: pointer;
 }
 
-.modal-gallery figure {
-    position: relative;
-    margin: 10px;
-}
-
-.modal-gallery span {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background: black;
-    border-radius: 12%;
-    padding: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-gallery .fa-trash-can {
-    font-size: 10px;
-    color: white;
-    cursor: pointer;
-}
