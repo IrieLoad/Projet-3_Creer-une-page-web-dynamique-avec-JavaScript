@@ -197,3 +197,35 @@ header nav ul li a {
 	color: black;
 }
 
+/* boutons de filtre */
+/* Styles de base pour tous les boutons de filtre */
+.filters {
+	display: flex;
+	justify-content: center;
+}
+
+.filter-btn {
+	font-family: 'Work Sans';
+	margin: 20px 0 35px 0;
+    background-color: #fff; /* Couleur de fond des boutons */
+    border: 1px solid #1D6154; /* Bordure fine et légère */
+    border-radius: 30px; /* Bordures arrondies */
+    padding: 8px 15px; /* Espacement interne (padding) */
+    margin-right: 10px; /* Espacement entre les boutons */
+    font-size: 16px; /* Taille du texte */
+    color: #1D6154; /* Couleur du texte */
+    cursor: pointer; /* Curseur en forme de main au survol */
+    transition: background-color 0.3s, color 0.3s; /* Transition douce pour les changements de style */
+}
+
+/* Effets au survol */
+.filter-btn:hover, .filter-btn.active{
+    background-color: #1D6154; /* Couleur de fond au survol */
+    color: #fff; /* Couleur du texte au survol */
+}
+
+/* Effets au focus */
+.filter-btn:focus {
+    outline: none; /* Supprime le contour par défaut du focus */
+    /*box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.25); /* Ajoute une ombre pour indiquer le focus */
+}

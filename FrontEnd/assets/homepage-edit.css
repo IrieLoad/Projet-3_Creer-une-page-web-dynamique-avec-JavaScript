@@ -176,6 +176,7 @@ body header {
 }
 
 .upload-div {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -214,7 +215,7 @@ body header {
 }
 
 .uploadForm-div label {
-    color: #3D3D3D;
+    color: #306685;
     font-size: 16px;
     font-weight: 500px;
 }
@@ -222,6 +223,27 @@ body header {
 .upload-section p {
     font-size: 12px;
     color: #a8a8a8;
+}
+
+.upload-div .remove-image-icon {
+    position: absolute; /* Position absolue pour superposer le bouton */
+    bottom: 10px; /* Position en bas */
+    left: 50%; /* Aligner horizontalement au centre */
+    transform: translateX(-50%); /* Centre l'icône horizontalement */
+    background-color: rgba(255, 255, 255, 0.5); /* Fond transparent */
+    font-size: 16px;
+    color: #1D6154; /* Couleur du texte */
+    border: 1px solid #1D6154; 
+    padding: 8px;
+    cursor: pointer;
+    display: none; /* Masqué par défaut */
+    transition: background-color 0.3s, color 0.3s; /* Transition douce pour les changements de style */
+}
+
+.upload-div .remove-image-icon:hover {
+    background-color: #1D6154; /* Couleur de fond au survol */
+    color: white; /* Couleur du texte au survol */
+    border: 1px solid #1D6154;
 }
 
 .uploadForm-div input,
@@ -239,7 +261,7 @@ body header {
     cursor: pointer;
 }
 
-#add-photo-form button[type="submit"] {
+.submit-btn {
     height: 40px;
     font-size: 1em;
     border: none;
@@ -252,12 +274,14 @@ body header {
     text-align: center;
     border-radius: 60px;
     text-decoration: none;
-    cursor: pointer;
+    cursor: not-allowed;
 }
 
-#add-photo-form button[type="submit"]:hover {
-    background-color: #1D6154;
-    ;
+.submit-btn.active {
+    background-color: #1D6154; /* Couleur de fond pour le bouton actif */
+    color: #fff; /* Couleur du texte pour le bouton actif */
+    border: 1px solid #1D6154; /* Bordure bleue */
+    cursor: pointer;
 }
 
 .modal-gallery figure {

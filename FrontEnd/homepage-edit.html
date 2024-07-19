@@ -12,8 +12,8 @@
 	<link rel="stylesheet" href="./assets/style.css">
 	<link rel="stylesheet" href="./assets/login.css">
     <script src="https://kit.fontawesome.com/9c66714515.js" crossorigin="anonymous"></script>
-	<script src="./JS/script.js" defer></script>
 	<script src="./JS/login.js" defer></script>
+	<script src="./JS/script.js" defer></script>
 </head>
 <body>
 	<header>
@@ -135,6 +135,7 @@
                             <input type="file" id="photo" name="photo" style="display: none;">
 							<img src="" alt="Preview">
                             <p>jpg, png : 4mo max</p>
+							<i class="fa-solid fa-file-circle-xmark remove-image-icon" style="display:none;"></i>
                         </div>
                         <label for="title">Titre</label>
                         <input type="text" id="title" name="title">
@@ -145,7 +146,7 @@
                             <option value="category3">Hotels & restaurants</option>-->
                         </select>
                     </div>
-                    <button type="submit">Valider</button>
+                    <button type="submit" class="submit-btn" disabled>Valider</button>
                 </form>
             </div>
         </div>
