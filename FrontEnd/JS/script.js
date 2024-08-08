@@ -241,7 +241,7 @@ function initializeModals() {
         console.error("L'élément #open-add-photo n'a pas été trouvé."); // Affiche un message d'erreur si le bouton n'est pas trouvé
     }
 
-    //console.log("Écouteur d'événements ajouté au lien de déclenchement de la modale"); //
+    //console.log("Écouteur d'événements ajouté au lien de déclenchement de la modale");
 }
 
 // Appeler initializeModals seulement sur la page homepage-edit.html

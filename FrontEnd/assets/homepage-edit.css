@@ -276,11 +276,11 @@ body header {
     bottom: 10px; 
     left: 50%;
     transform: translateX(-50%); /* Centre l'icône horizontalement */
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: white;
     font-size: 16px;
-    color: #1D6154; 
-    border: 1px solid #1D6154; 
-    padding: 8px;
+    color: red; 
+    border: 1px solid white; 
+    padding: 5px;
     cursor: pointer;
     display: none; 
     transition: background-color 0.3s, color 0.3s;
@@ -288,9 +288,9 @@ body header {
 
 /* Effet au survol de l'icône pour supprimer l'image */
 .upload-div .remove-image-icon:hover {
-    background-color: #1D6154; 
+    background-color: red; 
     color: white; 
-    border: 1px solid #1D6154;
+    border: 1px solid red;
 }
 
 /* Champs de saisie et de sélection dans le formulaire d'ajout de photo */
