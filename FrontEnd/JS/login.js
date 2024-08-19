@@ -17,6 +17,15 @@ form.addEventListener("submit", function (e) {
     // Log les valeurs récupérées
     //console.log("Email:", usersEmail);
     //console.log("Password:", usersPassword);
+
+    // Vérifie si les champs email et mot de passe sont vides
+    if (usersEmail === "" || usersPassword === "") {
+        console.log("Un des champs est vide")
+        // Si l'un des champs est vide, affiche un message d'erreur
+        errorMessage.textContent = "Veuillez remplir tous les champs."; // Définit le texte du message d'erreur
+        errorMessage.style.color = 'red'; // Change la couleur du texte du message d'erreur en rouge
+        return; // Stoppe l'exécution de la fonction pour éviter d'envoyer une requête vide
+    }
     
     // Envoie une requête de connexion à l'API
     fetch("http://localhost:5678/api/users/login", {
